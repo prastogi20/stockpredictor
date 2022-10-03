@@ -1,0 +1,4 @@
+.env
+Resources/Tweet.csv
+Resources/Company_Tweet.csv
+Resources/tsla_tweets.csv
