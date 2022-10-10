@@ -208,5 +208,12 @@ We changed the ML algorithm to Gradient Boost, on the same data set with Textblo
 However, this did not significantly improve model performance. The recall of price fall improved, but the recall for price increase suffered. This trade-off probably suggests the limitation of the bagging method and the data used.
 
 ### FBProphet Model Analysis
+Prophet Model prediction of TSLA stock prices<br>
+<a><img src="Resources/Images/forecast.png"/></a>
+
+TSLA's actual stock price from 2015 - 2020<br>
+<a><img src="Resources/Images/TSLA-stock price.png"/></a>
+
+In the first image, the black dots are the actual stock price data, the blue band is the price that was predicted by the Facebook Prophet model. The predicted figures include y hat, y upper, and y lower. From the data, it is easy to tell that before 2020, most of the actual data is align with the prediction. However, as Table 2 has shown, after 2020, the prediction wasn't accurate anymore due to the severe volatility of TSLA (see image-2). This confirmed that the model works best with time series that have strong seasonal effects and several seasons of historical data. Since Covid-19 largely affected the stock price after 2020, the prediction seems less reliable while it shows high level of accuracy before 2020.
 
 
