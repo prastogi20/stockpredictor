@@ -45,8 +45,9 @@ The available TSLA data is quiet balanced, but peaking in the end.
 ### Sentiment Analysis
 
 We used nlp based VaderSentiment and Textblob to evaluate the sentiments from the available tweet data. Overall both of the model gave similar results, but we found VaderSentiment runs much faster than textblob.
+<a><img src="Resources/Images/Tweetspolarity.png"/></a>
 
-For the data used for analysis adding sentiments analysis results as one of the feature used for predictions along with technical indicators did not significantly impacted the performance of the model. Details avaiable in model wise analysis report.
+For the data used for analysis adding sentiments analysis results as one of the feature used for predictions along with technical indicators did not significantly impacted the performance of the model. Details available in model wise analysis report.
 
 ### KNN Model Analysis
 #### **Summary**
