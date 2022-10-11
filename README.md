@@ -6,18 +6,20 @@ For the purpose of our analysis foucsed on TSLA stock.
 
 ## Additional libraries Required to run the code
 
-***For sentiment analysis we are using nlp packages vadersentiment & textblob. You can install these pacakges from commandline as below***
+**_For sentiment analysis we are using nlp packages vadersentiment & textblob. You can install these pacakges from commandline as below_**
+
 1. pip install vaderSentiment
 2. conda install -c conda-forge textblob
 
-***Deep learning - Tensorflow & Keras***
+**_Deep learning - Tensorflow & Keras_**
+
 1. Tensorflow and keras - to install please visit https://www.tensorflow.org/install
- 
+
 ## Data used for predictions and analysis
 
-* To run this code download Resources Company_Tweet.csv & Tweet.csv from kaggle link https://www.kaggle.com/code/saadusama/twitter-s-impact-on-stock-market-prices/data and copy them in Resources folder.<br><br>
-**NOTE:** As tweets data files are very large we could not upload them in git as account limit is max 100MB per file<br>
-* TSLA historical stock data is downloaded using GOOGLEFINANCE function and is saved in TSLA.csv, in resources folder
+- To run this code download Resources Company_Tweet.csv & Tweet.csv from kaggle link https://www.kaggle.com/code/saadusama/twitter-s-impact-on-stock-market-prices/data and copy them in Resources folder.<br><br>
+  **NOTE:** As tweets data files are very large we could not upload them in git as account limit is max 100MB per file<br>
+- TSLA historical stock data is downloaded using GOOGLEFINANCE function and is saved in TSLA.csv, in resources folder
 
 ## Code flow
 
@@ -33,14 +35,15 @@ Main.ipynb inturn run the following notebooks, in order -
 
 4. **Stock_price_prediction_LTSM.ipynb** - the purpose of this file is to create a stacked LSTM model that uses deep learning to predict the price and analyse it's performance.
 
-5. We also evaluated fbprophet for stock price prediction. Refer the URL mentioned below for the same <br> 
-https://colab.research.google.com/drive/1R_3ay9-X4SH9mh5xhsan8Vn1nWkWpOwl?usp=sharing
+5. We also evaluated fbprophet for stock price prediction. Refer the URL mentioned below for the same <br>
+   https://colab.research.google.com/drive/1R_3ay9-X4SH9mh5xhsan8Vn1nWkWpOwl?usp=sharing
 
 ## Analysis Report
 
 ### Historical TSLA stock data
-The available TSLA data is quiet balanced, but peaking in the end. 
- <a><img src="Resources/Images/TSLAHistoricalCloseValue.png" title="TSLA stock historical Close values"/></a>
+
+The available TSLA data is quiet balanced, but peaking in the end.
+<a><img src="Resources/Images/TSLAHistoricalCloseValue.png" title="TSLA stock historical Close values"/></a>
 
 ### Sentiment Analysis
 
@@ -50,14 +53,16 @@ We used nlp based VaderSentiment and Textblob to evaluate the sentiments from th
 For the data used for analysis adding sentiments analysis results as one of the feature used for predictions along with technical indicators did not significantly impacted the performance of the model. Details available in model wise analysis report.
 
 ### KNN Model Analysis
+
 #### **Summary**
+
 We tried different premutations and combinations of parameters to optimise our KNN model,by finding the optimal value of n_neighbors for parameters used to train and test the model.
 We also evaluated the model by including sentiment analysis based on tweets data along with other features.
 
 If we take the best case scenario from among all tests we did, model predicted with overall accuracy of 51.3%. The model predicted fall in stock prices with 50% accuracy and increase in stock price with 53% accuracy. Below is the classification report for best performing model from among all knn models we created.</br>
 
->Optimal value of n_neighbors is 13<br>
->Balanced accuracy score for the model is 0.5130605345410474<br>
+> Optimal value of n_neighbors is 13<br>
+> Balanced accuracy score for the model is 0.5130605345410474<br>
 >
 >                   precision    recall  f1-score   support
 >
@@ -68,65 +73,72 @@ If we take the best case scenario from among all tests we did, model predicted w
 >        macro avg       0.51      0.51      0.51       501
 >     weighted avg       0.51      0.51      0.51       501
 
-
 #### **Details**
-#### ***KNN Model 1***
+
+#### **_KNN Model 1_**
+
 Impact of scoring technique used to find n_neighbors on performance of the KNN Model
 
 **Given the data it is observed that performace of KNN model improves, when n_neighbors is set to 1 and test size is 20%. The optimal value of n_neighbors is obtained by using cross validation scoring technique using "recall" score.</br>**
 
-***Below are the results when optimal value of n_neighbors is obtained by using cross_val_score, with scoring set to "recall"***  
->Optimal value of n_neighbors is 1<br>
->Balanced accuracy score for the model is 0.5133665506336313<br>
->
->                   precision    recall  f1-score   support 
->
->                0       0.51      0.60      0.55       294  
->                1       0.52      0.43      0.47       299   
->
->         accuracy                           0.51       593 
->        macro avg       0.51      0.51      0.51       593  
->     weighted avg       0.51      0.51      0.51       593  
+**_Below are the results when optimal value of n_neighbors is obtained by using cross_val_score, with scoring set to "recall"_**
 
-***Below are the results when optimal value of n_neighbors is obtained by using cross_val_score, with scoring set to "accuracy"***  
->Optimal value of n_neighbors is 5<br>                                 
->Balanced accuracy score for the model is 0.4778513412053784<br>
+> Optimal value of n_neighbors is 1<br>
+> Balanced accuracy score for the model is 0.5133665506336313<br>
 >
->                   precision    recall  f1-score   support             
+>                   precision    recall  f1-score   support
 >
->                0       0.48      0.55      0.51       294  
->                1       0.48      0.40      0.44       299  
+>                0       0.51      0.60      0.55       294
+>                1       0.52      0.43      0.47       299
 >
->         accuracy                           0.48       593  
->        macro avg       0.48      0.48      0.47       593  
->     weighted avg       0.48      0.48      0.47       593  
+>         accuracy                           0.51       593
+>        macro avg       0.51      0.51      0.51       593
+>     weighted avg       0.51      0.51      0.51       593
 
-#### ***KNN Model 2***
+**_Below are the results when optimal value of n_neighbors is obtained by using cross_val_score, with scoring set to "accuracy"_**
+
+> Optimal value of n_neighbors is 5<br>  
+> Balanced accuracy score for the model is 0.4778513412053784<br>
+>
+>                   precision    recall  f1-score   support
+>
+>                0       0.48      0.55      0.51       294
+>                1       0.48      0.40      0.44       299
+>
+>         accuracy                           0.48       593
+>        macro avg       0.48      0.48      0.47       593
+>     weighted avg       0.48      0.48      0.47       593
+
+#### **_KNN Model 2_**
+
 Impact of the way training and testing dataset are generated on performance of the KNN Model.
 
 **Given the data it is observed that KNN Model perform better when training & testing datasets are constructed keeping time series nature of the data in mind, which is also the default behaviour of the KNN Model we created. It is observed that when training & testing datasets randomly using train_test_split the performance of our model falls.<br>**
 
-***Referring to the classification report below,these are the best results that we could achieve when training and testing datasets are generated randomly.***  
->Optimal value of n_neighbors is 69<br>
->Balanced accuracy score for the model is 0.4946751260408996<br>
+**_Referring to the classification report below,these are the best results that we could achieve when training and testing datasets are generated randomly._**
+
+> Optimal value of n_neighbors is 69<br>
+> Balanced accuracy score for the model is 0.4946751260408996<br>
 >
 >                   precision    recall  f1-score   support
->    
+>
 >                0       0.52      0.45      0.48       139
 >                1       0.47      0.54      0.51       127
->    
+>
 >         accuracy                           0.49       266
 >        macro avg       0.49      0.49      0.49       266
 >     weighted avg       0.50      0.49      0.49       266
 
-#### ***KNN Model 3***
+#### **_KNN Model 3_**
+
 Impact of increasing/decreasing test data size on performance of the model.
 
-**As there is a major peak in data on later dates, increasing the training dataset & reducing test data size to 10% from 20% improved the performance of the model***
+**As there is a major peak in data on later dates, increasing the training dataset & reducing test data size to 10% from 20% improved the performance of the model\***
 
-***Referring to the classification report below,these are the best results that we could achieve by increasing the training dataset to 90%.***  
->Optimal value of n_neighbors is 13<br>
->Balanced accuracy score for the model is 0.5130605345410474<br>
+**_Referring to the classification report below,these are the best results that we could achieve by increasing the training dataset to 90%._**
+
+> Optimal value of n_neighbors is 13<br>
+> Balanced accuracy score for the model is 0.5130605345410474<br>
 >
 >                   precision    recall  f1-score   support
 >
@@ -137,8 +149,7 @@ Impact of increasing/decreasing test data size on performance of the model.
 >        macro avg       0.51      0.51      0.51       501
 >     weighted avg       0.51      0.51      0.51       501
 
-
-### ***KNN Model 4***
+### **_KNN Model 4_**
 
 Impact of adding results of Sentiments analysis based on the tweets along with technical indicators, on the performance of the model.
 
@@ -146,11 +157,10 @@ Impact of adding results of Sentiments analysis based on the tweets along with t
 
 #### Using VaderSentiment Analysis
 
-***When we added polarity of sentiments as one of the feature along with technical indicators, below is the best performance we could achieve. In this scenario increasing the test data size to 30% helped improve the performance of the model***
+**_When we added polarity of sentiments as one of the feature along with technical indicators, below is the best performance we could achieve. In this scenario increasing the test data size to 30% helped improve the performance of the model_**
 
-
->Optimal value of n_neighbors is 63<br>
->Balanced accuracy score for the model is 0.5057417565856893<br>
+> Optimal value of n_neighbors is 63<br>
+> Balanced accuracy score for the model is 0.5057417565856893<br>
 >
 >                   precision    recall  f1-score   support
 >
@@ -163,66 +173,62 @@ Impact of adding results of Sentiments analysis based on the tweets along with t
 
 #### Using TextBlob Sentiment Analysis
 
-***When we added output received from TextBlob sentiment analysis as one of the feature along with technical indicators, below is the best performance we could achieve. In this scenario the test data size of 20% helped improve the performance of the model***
+**_When we added output received from TextBlob sentiment analysis as one of the feature along with technical indicators, below is the best performance we could achieve. In this scenario the test data size of 20% helped improve the performance of the model_**
 
->Optimal value of n_neighbors is 1<br>
->Balanced accuracy score for the model is 0.5039049919484702<br>
+> Optimal value of n_neighbors is 1<br>
+> Balanced accuracy score for the model is 0.5039049919484702<br>
 >
 >                   precision    recall  f1-score   support
->     
+>
 >                0       0.51      0.48      0.50       276
 >                1       0.50      0.53      0.51       270
->     
+>
 >         accuracy                           0.50       546
 >        macro avg       0.50      0.50      0.50       546
 >     weighted avg       0.50      0.50      0.50       546
 
-
 ### Random Forest Model Analysis
+
 RF + technical indicators<br>
-<a><img src="Resources/Images/RF+TA.png"/></a> 
+<a><img src="Resources/Images/RF+TA.png"/></a>
 
-Random Forest model has average performance with only 50% overall accuracy.  It does not predict price fall well ('0') with only 35% precision. The model performs better when predicting price increases. However, this model has low recall, suggesting it only picks up about half of the correct instances.
- 
- 
+Random Forest model has mediocre performance with only 51% overall accuracy.
+The only upside is that it has a higher recall score when predicting price fall, meaning it picks up more correct price fall instances. However, it has low recall for price increase.
+
 RF + Vader Sentimental<br>
-<a><img src="Resources/Images/RF+VS.png"/></a> 
- 
+<a><img src="Resources/Images/RF+VS.png"/></a>
 
-We tried to improve the model by incorporating the Vader Sentimental score from daily tweets about Tesla stock from social media platform Twitter, which represents a proxy of market sentiment toward the stock.
-The model does not improve, but performs slightly worse overall.
-The only upside is that it has a higher recall score when predicting price increase, meaning it picks up more correct price increase instances.
+We tried to improve the model by incorporating the Vader Sentimental score from daily tweets about Tesla stock from social media platform Twitter, which represents a proxy of market sentiment toward the stock. The model does not improve, but performs slightly worse overall
 
 RF + Textblob<br>
-<a><img src="Resources/Images/RF+TB.png"/></a> 
- 
+<a><img src="Resources/Images/RF+TB.png"/></a>
 
 We then used another sentimental analysis tool textblob, and incorporated both sentiment and polarity score in the features data to predict price direction.
-While we only achieve slight improvement overall and have a very low recall score to predicting price fall, this significantly increases recall in predicting price increase, picking up 86% of the actual price increase instances.
-Overall, this model is good for fund managers with a long-only mandate, who are not going to short the stock.
- 
-Gradient Boost with Textblob<br>
-<a><img src="Resources/Images/RF+GB.png"/></a> 
+We only achieve slight improvement in overall recall. Prediction of price increase now has higher recall at the expense of price fall recall.
 
- 
-We changed the ML algorithm to Gradient Boost, on the same data set with Textblob sentiment scores.
-However, this did not significantly improve model performance. The recall of price fall improved, but the recall for price increase suffered. This trade-off probably suggests the limitation of the bagging method and the data used.
+Gradient Boost with Textblob<br>
+<a><img src="Resources/Images/RF+GB.png"/></a>
+
+We changed the ML algorithm to Gradient Boost, on the same data set with Textblob sentiment scores. However, this did not significantly improve model performance. This improves the recall score of price fall prediction, yet reduces the recall score of price increase. The trade-off in call score and no significant improvement on precision of both price directions suggest the limitation of the ML models based on the bagging method.
 
 ### LSTM Model Analysis
 
 We created a LSTM network for stock price prediction and forecasting. We observed for given TSLA data, model performed better when we used 60% of historical data for training.
 
-#### ***LSTM Performance Metric***
+#### **_LSTM Performance Metric_**
+
 Model performed really well on training and testing data. The difference between training and testing root mean squared error is just 8.71<br>
 <br>
 Root mean squared error for training data is 17.98<br>
 Root mean squared error for testing data is 26.69<br>
 
-#### ***LSTM Performance Charts***
+#### **_LSTM Performance Charts_**
+
 <a><img src="Resources/Images/LSTMTrain.png"/></a>
 <a><img src="Resources/Images/LSTMPredict.png"/></a>
 
 ### FBProphet Model Analysis
+
 Prophet Model prediction of TSLA stock prices<br>
 <a><img src="Resources/Images/forecast.png"/></a>
 
@@ -230,5 +236,3 @@ TSLA's actual stock price from 2015 - 2020<br>
 <a><img src="Resources/Images/TSLA-stock price.png"/></a>
 
 In the first image, the black dots are the actual stock price data, the blue band is the price that was predicted by the Facebook Prophet model. The predicted figures include y hat, y upper, and y lower. From the data, it is easy to tell that before 2020, most of the actual data is align with the prediction. However, as Table 2 has shown, after 2020, the prediction wasn't accurate anymore due to the severe volatility of TSLA (see image-2). This confirmed that the model works best with time series that have strong seasonal effects and several seasons of historical data. Since Covid-19 largely affected the stock price after 2020, the prediction seems less reliable while it shows high level of accuracy before 2020.
-
-
