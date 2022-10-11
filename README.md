@@ -40,7 +40,7 @@ https://colab.research.google.com/drive/1R_3ay9-X4SH9mh5xhsan8Vn1nWkWpOwl?usp=sh
 
 ### Historical TSLA stock data
 The available TSLA data is quiet balanced, but peaking in the end. 
- <a><img src="Resources/Images/TSLAHistoricalCloseValue.png"/>TSLA stock historical Close values</a>
+ <a><img src="Resources/Images/TSLAHistoricalCloseValue.png" title="TSLA stock historical Close values"/></a>
 
 ### Sentiment Analysis
 
@@ -53,7 +53,7 @@ For the data used for analysis adding sentiments analysis results as one of the 
 We tried different premutations and combinations of parameters to optimise our KNN model,by finding the optimal value of n_neighbors for parameters used to train and test the model.
 We also evaluated the model by including sentiment analysis based on tweets data along with other features.
 
-If we take the best case scenario from among all tests we did, model predicted with overall accuracy of 51.3%. The model predicted 52% of true negative and 51% of true positive for stock price direction. Below is the classification report for best performing model from among all knn models we created.</br>
+If we take the best case scenario from among all tests we did, model predicted with overall accuracy of 51.3%. The model predicted fall in stock prices with 50% accuracy and increase in stock price with 53% accuracy. Below is the classification report for best performing model from among all knn models we created.</br>
 
 >Optimal value of n_neighbors is 13<br>
 >Balanced accuracy score for the model is 0.5130605345410474<br>
@@ -206,6 +206,20 @@ Gradient Boost with Textblob<br>
  
 We changed the ML algorithm to Gradient Boost, on the same data set with Textblob sentiment scores.
 However, this did not significantly improve model performance. The recall of price fall improved, but the recall for price increase suffered. This trade-off probably suggests the limitation of the bagging method and the data used.
+
+### LSTM Model Analysis
+
+We created a LSTM network for stock price prediction and forecasting. We observed for given TSLA data, model performed better when we used 60% of historical data for training.
+
+#### ***LSTM Performance Metric***
+Model performed really well on training and testing data. The difference between training and testing root mean squared error is just 8.71<br>
+<br>
+Root mean squared error for training data is 17.98<br>
+Root mean squared error for testing data is 26.69<br>
+
+#### ***LSTM Performance Charts***
+<a><img src="Resources/Images/LSTMTrain.png"/></a>
+<a><img src="Resources/Images/LSTMPredict.png"/></a>
 
 ### FBProphet Model Analysis
 Prophet Model prediction of TSLA stock prices<br>
